@@ -1,0 +1,92 @@
+﻿@model IEnumerable<artevol.Models.order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+}
+
+<h2 class="text-center`">ORDERS</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payment_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tr_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tr_img)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.user1.name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr >
+                <td >
+                    @Html.DisplayFor(modelItem => item.amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payment_type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tr_id)
+                </td>
+                <td>
+                    @*<img src="@Url.Content(item.tr_img)" />*@
+                    @{ 
+                    string url = "~/Content" + item.tr_img;
+                    }
+
+                    <img src="@Url.Content(url)" class="iw" alt="abc" style="height:100px;object-fit:cover" />
+
+@*                    @Html.DisplayFor(modelItem => item.tr_img)*@
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.user1.name)
+                </td>
+                     <td>
+         @if(item.status == "placed") { 
+             @Html.ActionLink("ACCEPT", "accept", new { id = item.id}, new {@class="btn btn-success mx-2"} )
+            
+             @Html.ActionLink("DECLINE", "decline", new { id = item.id}, new { @class = "btn btn-danger mx-2" }) 
+         }
+         else if(item.status == "accepted"){
+         <div class="btn btn-success w-100 px-3 disabled">ACCEPTED</div>
+         }else if(item.status == "declined"){
+         <div class="btn btn-danger w-100 px-3 disabled">DECLINED</div>
+         }
+
+         
+         
+     </td>
+            </tr>
+        }
+
+    </table>
+</div>

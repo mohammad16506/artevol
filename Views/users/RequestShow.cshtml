@@ -1,0 +1,120 @@
+﻿@model IEnumerable<artevol.Models.request>
+
+@{
+    ViewBag.Title = "RequestShow";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+}
+
+<h2 class="text-center">RequestShow</h2>
+
+<div>
+    
+    <hr />
+
+    <div class="container my-5">
+        <table class="table my-5 table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>User</th>
+                <th>ReqType</th>
+                <th>Desc</th>
+                <th>Status</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.status == "pending")
+                {
+                    <tr>
+                        <td>
+                            @item.id
+                        </td>
+                        <td>
+                            @item.email
+                        </td>
+                        <td>
+                            @item.user
+                        </td>
+
+                        <td>
+                            @item.reqType
+                        </td>
+                        <td>
+                            @item.desc
+                        </td>
+                        <td>
+                            @item.status
+                        </td>
+                        <td class="flex">
+                            
+                            @Html.ActionLink("Accept", "ReqAction", new { id = item.id, status = "accept", uid = item.user }, new { @class = "btn btn-success px-5 mx-1" }) 
+                        @Html.ActionLink("Delete", "ReqAction", new { id = item.id, status = "delete", uid = item.user }, new { @class = "btn btn-danger px-5 mx-1" })
+                        </td>
+                    </tr>
+                }
+                else if (item.status == "accept")
+                {
+                    <tr>
+                        <td>
+                            @item.id
+                        </td>
+                        <td>
+                            @item.email
+                        </td>
+                        <td>
+                            @item.user
+                        </td>
+
+                        <td>
+                            @item.reqType
+                        </td>
+                        <td>
+                            @item.desc
+                        </td>
+                        <td>
+                            @item.status
+                        </td>
+                        <td>
+                            <div class="w-100 p-2 rounded bg-success text-center text-light" style="">ACCEPTED</div>
+                            @*@Html.ActionLink("Accept", "ReqAction", new { id = item.id, status = "accept", uid = item.user }, new { @class = "btn btn-success" }) |
+                        @Html.ActionLink("Delete", "ReqAction", new { id = item.id, status = "delete", uid = item.user }, new { @class = "btn btn-danger" })*@
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            @item.id
+                        </td>
+                        <td>
+                            @item.email
+                        </td>
+                        <td>
+                            @item.user
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(p =>item.user)
+                            
+                        </td>
+                        <td>
+                            @item.desc
+                        </td>
+                        <td>
+                            @item.status
+                        </td>
+                        <td>
+                            <div class="w-100 p-2 rounded bg-danger text-center text-light" style="">DECLINED</div>
+                            @*@Html.ActionLink("Accept", "ReqAction", new { id = item.id, status = "accept", uid = item.user }, new { @class = "btn btn-success" }) |
+        @Html.ActionLink("Delete", "ReqAction", new { id = item.id, status = "delete", uid = item.user }, new { @class = "btn btn-danger" })*@
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <hr />
+</div>
+

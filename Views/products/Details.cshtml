@@ -1,0 +1,256 @@
+﻿@model artevol.Models.prd_bids
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+    int i = 0;
+}
+
+
+<section id="center" class="center_list clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="center_list_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h5 class="mgt"><a href="#">Home</a> / List Details / @Model.Product.name <h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="list_pg" class="clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="list_pg_1 clearfix">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="list_pg_1l clearfix">
+
+
+                            <div class="product_1i clearfix">
+                                <h5 class="mgt">SEARCH</h5>
+                                <div class="input-group">
+                                    <input type="text" class="form-control form_2" placeholder="Search Here...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="blog_1li2 clearfix">
+                                <h5 class="mgt">CATEGORIES</h5>
+                                <h6><a href="@Url.Action("List", "Products", new{category=1})"><i class="fa fa-circle-o"></i> PAINTINGS<span class="pull-right">(09)</span></a></h6>
+                                <h6><a href="@Url.Action("List", "Products", new {category=2})"><i class="fa fa-circle-o"></i> SCILPTURES<span class="pull-right">(10)</span></a></h6>
+                                <h6><a href="@Url.Action("List", "Products", new {category=7})"><i class="fa fa-circle-o"></i> CERAMICS<span class="pull-right">(08)</span></a></h6>
+                                <h6 class="pdb border_none"><a href="@Url.Action("List", "Products", new {category=5})"><i class="fa fa-circle-o"></i> DIGITAL ARTS<span class="pull-right">(08)</span></a></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="detail_1l clearfix">
+                            <div class="col-sm-5 space_left">
+                                <div class="detail_1ll clearfix">
+                                    <div class="carousel slide article-slide" id="article-photo-carousel">
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner cont-slider">
+                                            @foreach (var image in Model.Product.images)
+                                            {
+                                                string url = "~/Content" + image.url;
+
+                                                <div class="item @(i == 1 ? "active" : "" )">
+                                                    <img title="" src="@Url.Content(url)" alt="abc" class="iw" style="object-fit:cover;height:70vh;">
+                                                </div>
+                                                i++;
+                                            }
+
+                                        </div>
+                                            @{ i = 0; }
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            @foreach (var image in Model.Product.images)
+                                            {
+                                                string url = "~/Content" + image.url;
+
+                                                <li class="item @(i==1 ? "active" : "" )" data-slide-to="@i" data-target="#article-photo-carousel">
+                                                    <img src="@Url.Content(url)" alt="abc" style="object-fit:cover">
+                                                </li>
+
+                                                i++;
+                                            }
+
+                                            
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-7 space_left">
+                                <div class="detail_1lr clearfix">
+                                    <div class="detail_1lri clearfix">
+                                        <h2 class="mgt">@Model.Product.name</h2>
+
+
+                                        <hr>
+                                        @if (Model.Product.sale_type == 1)
+                                        {
+                                        <h3><span class="span_1 col_1">$@Model.Product.price</span> </h3>
+                                        }
+                                    </div>
+
+
+                                    <div class="detail_1lri3 clearfix">
+                                        <div class="col-sm-6 space_left">
+
+                                        </div>
+                                        <div class="col-sm-6 space_right">
+                                            <div class="detail_1lri3r clearfix">
+                                                @if (Model.Product.sale_type == 1)
+                                                {
+                                                    //<h5 class="text-dark"> $@Model.Product.price</h5>
+                                                    <h6>@Html.ActionLink("Add To Cart", "addToCart", Model.Product, new { @class = "button mgt" })</h6>
+                                                }
+                                                else if (Model.Product.sale_type == 3)
+                                                {
+                                                    //<p class="text-success">BID IN AUCTION</p>
+                                                    //<h6><a href="#menu2" class="button">Place Bid In Auction</a> </h6>
+                                                    <h6 class="text-success text-capitalize">This Product Is set for auction scroll down to see the bids and auction</h6>
+                                                }
+                                                else
+                                                {
+                                                    <h3 class="text-danger">NOT FOR SALE</h3>
+                                                    // <h6>@Html.ActionLink("Buy", "Bid", Model, new { @class = " button disabled" })</h6>
+                                                }
+                                                @*<h5 class="mgt text-right"><a class="button mgt" href="@Url.Action("addToCart","Products")">ADD TO CART</a></h5>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail_1lri4 clearfix">
+
+                                        <hr>
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-repeat"></i> Add to Compare</a></li>
+                                            <li><a href="#"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
+                                            <li><a href="#"><i class="fa fa-share-alt"></i> Share</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product_detail_1 clearfix">
+                            <ul class="nav nav-tabs tab_1">
+                                <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-globe"></i> Description</a></li>
+                                <li class=""><a data-toggle="tab" href="#menu1"><i class="fa fa-photo"></i> Additional Information</a></li>
+                                @if (Model.Product.sale_type == 3)
+                                {
+                                 <li class=""><a data-toggle="tab" href="#menu2"><i class="fa fa-cog"></i> Auction Bids</a></li> 
+                                }
+                            </ul>
+                            <div class="tab-content clearfix">
+                                <div id="home" class="tab-pane fade active in clearfix">
+                                    <div class="click clearfix">
+                                        <div class="col-sm-12">
+                                            <div class="home_i">
+                                                <p class="mgt">@Model.Product.description</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="menu1" class="tab-pane fade clearfix">
+                                    <div class="click clearfix">
+                                        <div class="col-sm-12">
+                                            <div class="menu_i clearfix">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Pricing</td>
+                                                            <td>
+                                                                @if (Model.Product.sale_type == 1)
+                                                                {
+                                                                    <h5 class="text-dark"> $@Model.Product.price</h5>
+                                                                    // <h6>@Html.ActionLink("Add To Cart", "addToCart", Model, new { @class = "button mgt" })</h6>
+                                                                }
+                                                                else if (Model.Product.sale_type == 3)
+                                                                {
+                                                                    <p class="text-success">BID IN AUCTION</p>
+                                                                    // <h6>@Html.ActionLink("Bid", "Bid", Model, new { @class = " button " })</h6>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p class="text-danger">NOT FOR SALE</p>
+                                                                    //<h6>@Html.ActionLink("Buy", "Bid", Model, new { @class = " button disabled" })</h6>
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Stock Availability</td>
+                                                            <td> @Model.Product.sale_type </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="menu2" class="tab-pane fade clearfix">
+                                    <div class="click clearfix">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                    
+                                                <!-- Form for placing bids -->
+                                                @using (Html.BeginForm("PlaceBid", "Products", FormMethod.Post))
+                                                {
+                                                    @Html.HiddenFor(model => model.Product.id) <!-- Hidden field to store the product ID -->
+                                                    <div class="mb-3">
+                                                        @Html.Hidden("Prd_Id",Model.Product.id)
+                                                        <label for="bidAmount" class="form-label">Enter Your Bid Amount:</label>
+                                                        <input type="number" class="form-control" id="bidAmount" name="bidAmount" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Place Bid</button>
+                                                }
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="menu_i clearfix flex" style="flex-direction:column">
+                                                    @if (Model.Bids != null && Model.Bids.Any())
+                                                    { 
+                                                        i=0;
+                                                        foreach (var bids in Model.Bids)
+                                                        {
+                                                            <div class="card p-3 w-75 text-light fw-bold my-1 @(i==0 ? "bg-success" : "bg-danger") ">
+                                                                <h3 class="text-light text-center m-0">$@bids.amount</h3>
+                                                            </div>
+                                                            i++;
+                                                        }
+
+
+
+                                                    }
+                                                    else
+                                                    {
+                <h3 class="text-danger">No Bids Till Now Place Yours..</h3>
+            }
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+
+
+        </div>
+    </div>
+</section>
+
+<script src="~/Content/js/ziehharmonika.js"></script>
+
+

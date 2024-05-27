@@ -1,0 +1,117 @@
+﻿@model IEnumerable<artevol.Models.ProductImg>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+    //int i = 0;
+}
+<style>
+    .clip {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Optionally add ellipsis (...) to indicate clipped text */
+    }
+</style>
+<!--<h2>List</h2>-->
+<section id="list">
+    <div class="container">
+        <div class="row">
+            <div class="list_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h2 class="mgt">Special Products</h2>
+                </div>
+            </div>
+            <div class="list_2 clearfix">
+                <style>
+                    .rsd {
+                        display: flex;
+                        flex-wrap: wrap; /* Allow flex items to wrap to the next line if needed */
+                    }
+
+                        .rsd .col-md-3 {
+                            flex: 1 0 25%; /* Make each column grow to fill the available space equally */
+                            height: 80vh;
+                            min-height: fit-content !important;
+                            max-width: 25%
+                        }
+                </style>
+                <div class="row h-100 rsd">
+                    @if (Model.Count() == 0)
+                    {
+                        <h1 class="text-danger text-center">No Product Found For This Category</h1>
+
+                        return;
+
+
+                    }
+
+
+
+                    @foreach (var item in Model)
+                    {
+                        int j = 1;
+
+                        <div class="col-md-3 space_left my-2" style="">
+                            <div class="list_2im clearfix" style="height:70%">
+                                <div class="list_2imi clearfix h-100">
+                                    @foreach (var image in item.Images)
+                                    {
+                                        if (j <= 1)
+                                        {
+                                            string url = "~/Content" + image.url;
+                                            //<img src="@Url.Content(url)" alt="Product Image" width="100%" />
+                                            <img src="@Url.Content(url)" class="iw" alt="abc" style="height:100%;object-fit:cover" />
+                                            j++;
+                                        }
+                                    }
+                                </div>
+                                <div class="list_2imi1 clearfix">
+                                    <h5 class="mgt normal">New</h5>
+                                </div>
+                                <div class="list_2imi2 clearfix">
+                                    <span>
+                                        <a href="@Url.Action("Details", "Products", new { id = item.Product.id })"><i class="fa fa-eye"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list_2im1 clearfix" style="height:30%">
+                                <h4 class="clip"><a href="#">@item.Product.name</a></h4>
+                                <h5>
+                                    @*<a class="col_1 bold" href="#">@item.Product.price</a>*@
+                                    <b>
+                                        @if (item.Product.sale_type == 1)
+                                        {
+                                            <h5 class="text-dark"> $@item.Product.price</h5>
+                                            <h6>@Html.ActionLink("Add To Cart", "Details", new {id=item.Product.id} , new { @class = "button mgt" })</h6>
+                                        }
+                                        else if (item.Product.sale_type == 3)
+                                        {
+                                            <p class="text-success">BID IN AUCTION</p>
+                                            <h6>@Html.ActionLink("Bid", "Details", new { id = item.Product.id }, new { @class = " button " })</h6>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-danger">NOT FOR SALE</p>
+                                            <h6>@Html.ActionLink("Buy", "Bid", item, new { @class = " button disabled" })</h6>
+                                        }
+                                    </b>
+
+
+                                </h5>
+                                @*<h6><a class="button mgt" href="#"></a></h6>*@
+                                <h6>
+                                </h6>
+                            </div>
+                        </div>
+
+
+                    }
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+

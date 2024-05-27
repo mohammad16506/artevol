@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    ViewBag.Title = "err";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+}
+
+
+
+<section id="center" class="center_list clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="center_list_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h5 class="mgt"><a href="#">Home</a> / Login </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="register">
+    <div class="container">
+        <div class="row">
+            <div class="register_1 clearfix">
+                <div class="row">
+                    <div class="col-sm-6 space_left">
+                        <div class="register_1l clearfix">
+                            <div class="register_1li clearfix">
+                                <h4 class="text-danger text-center">@ViewBag.err</h4>
+                                <h3 class="mgt">Welcome to ArtEvol</h3>
+                                <!-- <p>Nulla quis sem at nibh imperdiet Duis sagittis ipsum Praesent mauris.</p> -->
+                                <h4 class="c_text">Login Into Your Account</h4>
+                            </div>
+                            @using (Html.BeginForm("Login", "Users", FormMethod.Post))
+                            {
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="register_1li1 clearfix">
+                                    <div class="col-sm-12 space_all">
+                                        <div class="register_1li1l clearfix">
+                                            <h5>Enter Your Email *</h5>
+                                            @Html.TextBox("email", "", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="register_1li1 clearfix">
+                                    <div class="col-sm-12 space_all">
+                                        <div class="register_1li1l clearfix">
+                                            <h5>Enter Your Password *</h5>
+                                            <input class="form-control" name="password" type="text">
+                                            <h5><button type="submit" class="button btn">SIGN IN</button></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="w-100 text-center my-3">
+                            <p class="fs-4">Not Registered..? <a class="fs-2 fw-bold text-decoration-underline" href="@Url.Action("Create","Users")">REGISTER HERE</a></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="register_1r clearfix">
+                            <img src="@Url.Content("~/Content/img/39.jpg")" class="iw" alt="abc" style="height:100vh;object-fit:cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+}
+
+<h2>Create</h2><h4>order</h4>
+<div class="container">
+    @using (Html.BeginForm("Create", "Orders", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2">ADDRESS</label>
+            <div class="col-md-10">
+                <input required type="text" name="address" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Payment Type</label>
+            <div class="col-md-10">
+                <select name="Payment_Type" class="form-control">
+                    <option value="Online Transaction">Online Transaction</option>
+                    <option value="COD" disabled>Cash On Delivery</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Transaction ID</label>
+            <div class="col-md-10">
+                <input required type="text" name="tr_id" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Transaction Image</label>
+            <div class="col-md-10">
+                <input required type="file" name="image" class="form-control" />
+            </div>
+        </div>
+        @Html.Hidden("user", (int)Session["uId"])
+        @Html.Hidden("date", DateTime.Today)
+        @Html.Hidden("status", "placed")
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input required type="submit" value="Create" class="btn button btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+</div>
+<hr />
+

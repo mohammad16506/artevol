@@ -1,0 +1,79 @@
+﻿@model artevol.Models.product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+}
+
+<h2 class="text-center">Edit Product</h2>
+        
+<div class="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2 text-capitalize" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control w-100 mw-75" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2 text-capitalize" })
+            <div class="col-md-10">
+            @*  @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control h-100 mw-100", style = "white-space: pre-wrap;" } })*@
+                <textarea class="form-control h-100 mw-100" id="description" name="description" rows="4">@Model.description</textarea>
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.sale_type, "sale_type", htmlAttributes: new { @class = "control-label col-md-2 text-capitalize" })
+            <div class="col-md-10">
+                @Html.DropDownList("sale_type", null, htmlAttributes: new { @class = "form-control w-100 mw-75" })
+                @Html.ValidationMessageFor(model => model.sale_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.art_type, "art_type", htmlAttributes: new { @class = "control-label col-md-2 text-capitalize" })
+            <div class="col-md-10">
+                @Html.DropDownList("art_type", null, htmlAttributes: new { @class = "form-control w-100 mw-75" })
+                @Html.ValidationMessageFor(model => model.art_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2 text-capitalize" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control w-100 mw-75" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group d-none">
+            @Html.LabelFor(model => model.addedBy, "addedBy", htmlAttributes: new { @class = "control-label col-md-2 text-capitalize" })
+            <div class="col-md-10">
+                @Html.DropDownList("addedBy", null, htmlAttributes: new { @class = "form-control w-100 mw-75" })
+                @Html.ValidationMessageFor(model => model.addedBy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success px-3 m-5" />
+            </div>
+        </div>
+    </div>
+}
+
+
+</div>
+

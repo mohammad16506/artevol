@@ -1,0 +1,441 @@
+﻿@model IEnumerable<artevol.Models.ProductImg>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+    int i = 1;
+    //int j = 1;
+
+}
+
+<div>
+    <style>
+        .disabled {
+            pointer-events: none;
+            cursor: default;
+            opacity:80%
+        }
+        .clip {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Optionally add ellipsis (...) to indicate clipped text */
+        }
+    </style>
+
+    <div>
+        <section id="center" class="center_home">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="height: 80vh;">
+                <div class="carousel-inner h-100">
+                    <div class="carousel-item active h-100">
+                        <div class="flex w-100 h-100 bg-dark" style="background-size:cover; background-image: url(@Url.Content("~/Content/img/7.jpg"));">
+                            <div class="p-2 bg-trb">
+                                <h1 class="m-0 text-light text-center">Elegance Redifined</h1>
+                                <h6 class="text-light text-center ">"Transform your surroundings with the timeless elegance of art. Let each masterpiece elevate your space, adding a touch of sophistication and beauty to your everyday life."</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item  h-100">
+                        <div class="flex w-100 h-100 bg-dark" style="background-size:cover; background-image: url(@Url.Content("~/Content/img/8.jpg"));">
+                            <div class="p-2 bg-trb">
+                                <h1 class="m-0 text-light text-center">Intense Artistry</h1>
+                                <h6 class="text-light text-center ">"Dive into a world where art speaks volumes and emotions are captured on canvas. Immerse yourself in the beauty of each piece, curated to evoke wonder and inspiration."</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item  h-100">
+                        <div class="flex w-100 h-100 bg-dark" style="background-size:cover; background-image: url(@Url.Content("~/Content/img//9.jpg"));">
+                            <div class="p-2 bg-trb">
+                                <h1 class="m-0 text-light text-center">Journey To Realm</h1>
+                                <h6 class="text-light text-center ">"Embark on a journey into the realm of creativity, where every brushstroke and sculpture tells a story. Explore our curated collection and discover the art that resonates."</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="offer">
+            <div class="container">
+                <div class="row">
+                    <div class="offer_1 clearfix">
+                        <div class="row" style="min-height: 435px;">
+                            <div class="col-md-8 p-1 catimg ">
+                                <!-- <div class="bg-trb position-absolute w-100 h-100 hov"></div> -->
+                                <a href="@Url.Action("List", new {category = 2})" class="">
+                                    <div class="bg-secondary w-100 h-100 flex cat_bg text-light" style="background-image: url(@Url.Content("~/Content/img/10.jpg"));">
+                                        <h1 class="text-light bg-trb p-2 text-cat">Sculptures</h1>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4 p-1 catimg ">
+                                <!-- <div class="bg-trb position-absolute w-100 h-100 hov"></div> -->
+                                <a href="@Url.Action("List", new {category = 1})" class="">
+                                    <div class="bg-dark w-100 h-100 flex cat_bg text-light" style="background-image: url(@Url.Content("~/Content/img/16.jpg"));">
+                                        <h1 class="text-light bg-trb p-2 text-cat">Paintings</h1>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row" style="min-height: 435px;">
+                            <div class="col-md-4 p-1 catimg ">
+                                <!-- <div class="bg-trb position-absolute w-100 h-100 hov"></div> -->
+                                <a href="@Url.Action("List", new {category = 3})" class="">
+                                    <div class="bg-dark w-100 h-100 flex cat_bg text-light" style="background-image: url(@Url.Content("~/Content/img/15.jpg"));">
+                                        <h1 class="text-light bg-trb p-2 text-cat">Drawings</h1>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-8 p-1 catimg ">
+                                <!-- <div class="bg-trb position-absolute w-100 h-100 hov"></div> -->
+                                <a href="@Url.Action("List", new {category = 5})" class="">
+                                    <div class="bg-secondary w-100 h-100 flex cat_bg text-light" style="background-image: url(@Url.Content("~/Content/img/25.jpg"));">
+                                        <h1 class="text-light bg-trb p-2 text-cat">Digtal Arts</h1>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="offer_2  clearfix">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="offer_2i text-center clearfix">
+                                    <span><i class="fa fa-truck"></i></span>
+                                    <h4>FREE SHIPPING</h4>
+                                    <p>"Enjoy the convenience of free shipping on all orders!"</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="offer_2i text-center clearfix">
+                                    <span><i class="fa fa-user"></i></span>
+                                    <h4>ONLINE SUPPORT</h4>
+                                    <p>"Access our reliable online support for all your inquiries and assistance needs!"</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="offer_2i text-center clearfix">
+                                    <span><i class="fa fa-thumbs-o-up"></i></span>
+                                    <h4>SPECIAL OFFER</h4>
+                                    <p>Take advantage of our special offer and elevate your shopping experience!"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="list">
+            <div class="container">
+                <div class="row">
+                    <div class="list_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h2 class="mgt">Special Products</h2>
+                        </div>
+                    </div>
+                    <div class="list_2 clearfix">
+                        <style>
+                            .rsd {
+                                display: flex;
+                                flex-wrap: wrap; /* Allow flex items to wrap to the next line if needed */
+                            }
+
+                                .rsd .col-md-3 {
+                                    flex: 1 0 25%; /* Make each column grow to fill the available space equally */
+                                    height: 80vh;
+                                    min-height: fit-content !important;
+                                    max-width: 25%
+                                }
+                        </style>
+                        <div class="row h-100 rsd">
+                            @foreach (var item in Model)
+                            {
+                                int j = 1;
+                                if (i <=4)
+                                {
+                                    <div class="col-md-3 space_left my-2" style="">
+                                        <div class="list_2im clearfix" style="height:70%">
+                                            <div class="list_2imi clearfix h-100">
+                                                @foreach (var image in item.Images)
+                                                {
+                                                    if (j <= 1)
+                                                    {
+                                                     //   @Html.Display(image.url);
+                                                        string url = "~/Content" + image.url;
+                                                        //<img src="@Url.Content(url)" alt="Product Image" width="100%" />
+                                                        <img src="@Url.Content(url)" class="iw" alt="abc" style="height:100%;object-fit:cover" />
+                                                        j++;
+                                                    }
+                                                }
+                                            </div>
+                                            <div class="list_2imi1 clearfix">
+                                                <h5 class="mgt normal">New</h5>
+                                            </div>
+                                            <div class="list_2imi2 clearfix">
+                                                <span>
+                                                    <a href="@Url.Action("Details", "Products", new { id = item.Product.id })"><i class="fa fa-eye"></i></a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="list_2im1 clearfix" style="height:30%">
+                                            <h4 class="clip"><a href="#">@item.Product.name</a></h4>
+                                            
+                                            <h5>
+                                                @*<a class="col_1 bold" href="#">@item.Product.price</a>*@
+                                                <b>
+                                                    @if (item.Product.sale_type == 1)
+                                                    {
+                                                        <h5 class="text-dark"> $@item.Product.price</h5>
+                                                        <h6>@Html.ActionLink("Add To Cart", "Details", new {id=item.Product.id}, new { @class = "button mgt" })</h6>
+                                                    }
+                                                    else if (item.Product.sale_type == 3)
+                                                    {
+                                                        <p class="text-success">BID IN AUCTION</p>
+                                                        <h6>@Html.ActionLink("Bid", "Bid", item, new { @class = " button disabled" })</h6>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-danger">NOT FOR SALE</p>
+                                                        <h6>@Html.ActionLink("Buy", "Bid", item, new { @class = " button disabled" })</h6>
+                                                    }
+                                                </b>
+
+
+                                            </h5>
+                                            @*<h6><a class="button mgt" href="#"></a></h6>*@
+                                            <h6>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    i++;
+                                }
+
+                            }
+
+                        </div>
+
+                    </div>
+
+                    <div class="list_4 clearfix">
+                        <div class="list_1 text-center clearfix">
+                            <div class="col-sm-12">
+                                <h2 class="mgt">HIGHEST CLASSICS</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 space_left">
+                                <div class="list_4i clearfix">
+                                    <div class="list_4i1 clearfix">
+                                        <img src="~/Content/img/20.jpg" class="iw" alt="abc" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4 space_left">
+                                <div class="list_4i clearfix">
+                                    <div class="list_4i1 clearfix">
+                                        <img src="~/Content/img/21.jpg" class="iw" alt="abc" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4 space_left">
+                                <div class="list_4i clearfix">
+                                    <div class="list_4i1 clearfix">
+                                        <img src="~/Content/img/22.jpg" class="iw" alt="abc" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--<section id="list_o">
+            <div class="container">
+                <div class="row">
+                    <div class="list_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h2 class="mgt">NEW IN THE STORE</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 space_left">
+                            <div class="list_2im clearfix">
+                                <div class="list_2imi clearfix">
+                                    <img src="~/Content/img/12.jpg" class="iw" alt="abc" />
+                                </div>
+                                <div class="list_2imi1 clearfix">
+                                    <h5 class="mgt normal">New</h5>
+                                </div>
+                                <div class="list_2imi2 clearfix">
+                                    <span>
+                                        <a href="#"><i class="fa fa-eye"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list_2im1 clearfix">
+                                <h4><a href="#">Per Conubia</a></h4>
+                                <h5>
+                                    <a class="col_1 bold" href="#"><span>£60.00</span> £50.00</a>
+                                </h5>
+                                <h6><a class="button mgt" href="#">Add To Cart</a></h6>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <div class="list_2im clearfix">
+                                <div class="list_2imi clearfix">
+                                    <img src="~/Content/img/13.jpg" class="iw" alt="abc" />
+                                </div>
+                                <div class="list_2imi1 clearfix">
+                                    <h5 class="mgt normal">New</h5>
+                                </div>
+                                <div class="list_2imi2 clearfix">
+                                    <span>
+                                        <a href="#"><i class="fa fa-eye"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list_2im1 clearfix">
+                                <h4><a href="#">Dapibus Diam</a></h4>
+                                <h5>
+                                    <a class="col_1 bold" href="#"><span>£60.00</span> £50.00</a>
+                                </h5>
+                                <h6><a class="button mgt" href="#">Add To Cart</a></h6>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <div class="list_2im clearfix">
+                                <div class="list_2imi clearfix">
+                                    <img src="~/Content/img/14.jpg" class="iw" alt="abc" />
+                                </div>
+                                <div class="list_2imi1 clearfix">
+                                    <h5 class="mgt normal">New</h5>
+                                </div>
+                                <div class="list_2imi2 clearfix">
+                                    <span>
+                                        <a href="#"><i class="fa fa-eye"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list_2im1 clearfix">
+                                <h4><a href="#">Eget Nulla</a></h4>
+                                <h5>
+                                    <a class="col_1 bold" href="#"><span>£60.00</span> £50.00</a>
+                                </h5>
+                                <h6><a class="button mgt" href="#">Add To Cart</a></h6>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 space_left">
+                            <div class="list_2im clearfix">
+                                <div class="list_2imi clearfix">
+                                    <img src="~/Content/img/15.jpg" class="iw" alt="abc" />
+                                </div>
+                                <div class="list_2imi1 clearfix">
+                                    <h5 class="mgt normal">New</h5>
+                                </div>
+                                <div class="list_2imi2 clearfix">
+                                    <span>
+                                        <a href="#"><i class="fa fa-eye"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list_2im1 clearfix">
+                                <h4><a href="#">Semper Porta</a></h4>
+                                <h5>
+                                    <a class="col_1 bold" href="#"><span>£60.00</span> £50.00</a>
+                                </h5>
+                                <h6><a class="button mgt" href="#">Add To Cart</a></h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>-->
+
+
+        <section id="testim">
+            <div class="container">
+                <div class="row">
+                    <div class="list_1 text-center clearfix">
+                        <div class="col-sm-12">
+                            <h2 class="mgt">ArtSpeaks</h2>
+                        </div>
+                    </div>
+                    <div class="testim_1 clearfix">
+                        <div class="row h-100">
+                            <div class="col-md-4 ">
+                                <div class="testim_1i clearfix">
+                                    <div class="testim_1i1 clearfix">
+                                        <span><i class="fa fa-quote-left"></i></span>
+                                    </div>
+                                    <div class="testim_1i2 clearfix">
+                                        <p class="col_2">
+                                            Discovering this art gallery felt like stumbling upon a hidden gem. The diverse collection of artwork and the welcoming atmosphere made for an enriching experience. I appreciated not only the exquisite pieces but also the exceptional customer service is the thing that enhanced my visit."
+                                        </p>
+                                        <div class="testim_1i2i clearfix">
+                                            <img src="~/Content/img/26.jpg" class="img-circle" alt="abc" />
+                                            <h4 class="col_1 mgt">
+                                                Saad Al-Ameri <br />
+                                                <span class="small_tag col_2">Mraketing Manager</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="testim_1i clearfix">
+                                    <div class="testim_1i1 clearfix">
+                                        <span><i class="fa fa-quote-left"></i></span>
+                                    </div>
+                                    <div class="testim_1i2 clearfix">
+                                        <p class="col_2">
+                                            Nestled in the heart of the city, this art gallery is truly an artistic oasis. I was captivated by the exquisite artwork on display and equally impressed by the exceptional customer service. The staff's passion for art shone through in their insightful discussions, adding depth to my visit."
+                                            <div class="testim_1i2i clearfix">
+                                                <img src="~/Content/img/27.jpg" class="img-circle" alt="abc" />
+                                                <h4 class="col_1 mgt">
+                                                    Emily Johnson <br />
+                                                    <span class="small_tag col_2">Mraketing Manager</span>
+                                                </h4>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="testim_1i clearfix">
+                                    <div class="testim_1i1 clearfix">
+                                        <span><i class="fa fa-quote-left"></i></span>
+                                    </div>
+                                    <div class="testim_1i2 clearfix">
+                                        <p class="col_2">
+                                            I recently visited this art gallery and was impressed not only by the exquisite artwork but also by the exceptional customer service. The attention to detail in each piece and the warm welcome from the staff created an unforgettable experience. I left feeling inspired and eager to return for more!"
+                                        </p>
+                                        <div class="testim_1i2i clearfix">
+                                            <img src="~/Content/img/28.jpg" class="img-circle" alt="abc" />
+                                            <h4 class="col_1 mgt">
+                                                Eva Disouza <br />
+                                                <span class="small_tag col_2">Mraketing Manager</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

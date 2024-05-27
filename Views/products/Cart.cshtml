@@ -1,0 +1,66 @@
+﻿@model IEnumerable<artevol.Models.cart>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+    int? total = 0;
+}
+
+<h2 class="text-center">Cart</h2>
+
+<div>
+    
+    <hr />
+    @if (Model.Count() == 0)
+    {
+        <h1 class="text-danger text-center">Your Cart Is Empty Browse To Add</h1>
+        <h6 class="text-center">
+            <a href="@Url.Action("Index","Products")">BROWSE</a>
+        </h6>
+    }
+    else
+    {
+<div class="container">
+    <table class="table border-none table-hover text-center">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="py-5">@item.name</td>
+                    <td class="py-5">@item.quantity</td>
+                    <td class="py-5">@item.price</td>
+                    <td class="py-5 text-center">
+                        <a href="@Url.Action("Remove","Products",item)" class="btn btn-danger text-light">X</a>
+                    </td>
+
+                    @{
+                        total += item.price;
+                    }
+                </tr>
+            }
+           
+            <tr>
+                <td colspan="2" class="text-center fs-2">Total: <b>@total</b> </td>
+                <td>
+
+                    <div class="flex w-75">
+                        <a class="btn btn-success p-2 px-4 text-light fs-3 w-100" href="@Url.Action("Create", "Orders" , new {cartItem = Model})"> CHECKOUT <span class="fa fa-money"></span> </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+                            }
+
+    </div>
+

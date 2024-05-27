@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="artevolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="art_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="bids">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prd_id" Type="int" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="amount" Type="int" />
+        </EntityType>
+        <EntityType Name="images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prd_id" Type="int" />
+          <Property Name="url" Type="text" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="date" Type="date" />
+          <Property Name="address" Type="text" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="payment_type" Type="varchar" MaxLength="50" />
+          <Property Name="tr_id" Type="int" />
+          <Property Name="tr_img" Type="text" />
+        </EntityType>
+        <EntityType Name="order_prd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order" Type="int" Nullable="false" />
+          <Property Name="product" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="text" />
+          <Property Name="sale_type" Type="int" />
+          <Property Name="art_type" Type="int" />
+          <Property Name="price" Type="int" />
+          <Property Name="addedBy" Type="int" />
+          <Property Name="isActive" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="reqType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user" Type="int" />
+          <Property Name="reqType" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="desc" Type="text" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sale_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sale" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="gender" Type="varchar" MaxLength="50" />
+          <Property Name="age" Type="int" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="role" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK_bids_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="bids" Type="Self.bids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bids">
+              <PropertyRef Name="prd_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bids_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="bids" Type="Self.bids" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bids">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_images_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="images" Type="Self.images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="images">
+              <PropertyRef Name="prd_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_prd_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="order_prd" Type="Self.order_prd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_prd">
+              <PropertyRef Name="order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_prd_product">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="order_prd" Type="Self.order_prd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_prd">
+              <PropertyRef Name="product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="addedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_request_reqType">
+          <End Role="reqType" Type="Self.reqType" Multiplicity="0..1" />
+          <End Role="request" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reqType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="reqType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_request_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="request" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="artevolModelStoreContainer">
+          <EntitySet Name="art_type" EntityType="Self.art_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bids" EntityType="Self.bids" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="images" EntityType="Self.images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_prd" EntityType="Self.order_prd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reqType" EntityType="Self.reqType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="request" EntityType="Self.request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sale_type" EntityType="Self.sale_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_bids_product" Association="Self.FK_bids_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="bids" EntitySet="bids" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bids_user" Association="Self.FK_bids_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="bids" EntitySet="bids" />
+          </AssociationSet>
+          <AssociationSet Name="FK_images_product" Association="Self.FK_images_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="images" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_prd_order" Association="Self.FK_order_prd_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="order_prd" EntitySet="order_prd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_prd_product" Association="Self.FK_order_prd_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="order_prd" EntitySet="order_prd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_user" Association="Self.FK_order_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_user" Association="Self.FK_product_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_request_reqType" Association="Self.FK_request_reqType">
+            <End Role="reqType" EntitySet="reqType" />
+            <End Role="request" EntitySet="request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_request_user" Association="Self.FK_request_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="request" EntitySet="request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="artevolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="art_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK_product_art_type" FromRole="art_type" ToRole="product" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="prd_id" Type="Int32" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="product" Relationship="Self.FK_images_product" FromRole="images" ToRole="product" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sale_type" Type="Int32" />
+          <Property Name="art_type" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="addedBy" Type="Int32" />
+          <NavigationProperty Name="art_type1" Relationship="Self.FK_product_art_type" FromRole="product" ToRole="art_type" />
+          <NavigationProperty Name="images" Relationship="Self.FK_images_product" FromRole="product" ToRole="images" />
+          <NavigationProperty Name="sale_type1" Relationship="Self.FK_product_sale_type" FromRole="product" ToRole="sale_type" />
+          <NavigationProperty Name="user" Relationship="Self.FK_product_user" FromRole="product" ToRole="user" />
+          <Property Name="isActive" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="bids" Relationship="artevolModel.FK_bids_product" FromRole="product" ToRole="bid" />
+          <NavigationProperty Name="order_prd" Relationship="artevolModel.FK_order_prd_product" FromRole="product" ToRole="order_prd" />
+        </EntityType>
+        <EntityType Name="reqType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="requests" Relationship="Self.FK_request_reqType" FromRole="reqType" ToRole="request" />
+        </EntityType>
+        <EntityType Name="request">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user" Type="Int32" />
+          <Property Name="reqType" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reqType1" Relationship="Self.FK_request_reqType" FromRole="request" ToRole="reqType" />
+          <NavigationProperty Name="user1" Relationship="Self.FK_request_user" FromRole="request" ToRole="user" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_user_roles" FromRole="roles" ToRole="user" />
+        </EntityType>
+        <EntityType Name="sale_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sale" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK_product_sale_type" FromRole="sale_type" ToRole="product" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Int32" />
+          <NavigationProperty Name="products" Relationship="Self.FK_product_user" FromRole="user" ToRole="product" />
+          <NavigationProperty Name="requests" Relationship="Self.FK_request_user" FromRole="user" ToRole="request" />
+          <NavigationProperty Name="role1" Relationship="Self.FK_user_roles" FromRole="user" ToRole="roles" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="bids" Relationship="artevolModel.FK_bids_user" FromRole="user" ToRole="bid" />
+          <NavigationProperty Name="orders" Relationship="artevolModel.FK_order_user" FromRole="user" ToRole="order" />
+        </EntityType>
+        <Association Name="FK_product_art_type">
+          <End Role="art_type" Type="Self.art_type" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="art_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="art_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_images_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="images" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="images">
+              <PropertyRef Name="prd_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_sale_type">
+          <End Role="sale_type" Type="Self.sale_type" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sale_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="sale_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="addedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_request_reqType">
+          <End Role="reqType" Type="Self.reqType" Multiplicity="0..1" />
+          <End Role="request" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reqType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="reqType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_request_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="request" Type="Self.request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="request">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_roles">
+          <End Role="roles" Type="Self.role" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="artevolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="art_type" EntityType="Self.art_type" />
+          <EntitySet Name="images" EntityType="Self.image" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="reqTypes" EntityType="Self.reqType" />
+          <EntitySet Name="requests" EntityType="Self.request" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="sale_type" EntityType="Self.sale_type" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_product_art_type" Association="Self.FK_product_art_type">
+            <End Role="art_type" EntitySet="art_type" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_images_product" Association="Self.FK_images_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="images" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_sale_type" Association="Self.FK_product_sale_type">
+            <End Role="sale_type" EntitySet="sale_type" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_user" Association="Self.FK_product_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_request_reqType" Association="Self.FK_request_reqType">
+            <End Role="reqType" EntitySet="reqTypes" />
+            <End Role="request" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_request_user" Association="Self.FK_request_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="request" EntitySet="requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_roles" Association="Self.FK_user_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <EntitySet Name="bids" EntityType="artevolModel.bid" />
+          <AssociationSet Name="FK_bids_product" Association="artevolModel.FK_bids_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="bid" EntitySet="bids" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bids_user" Association="artevolModel.FK_bids_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="bid" EntitySet="bids" />
+          </AssociationSet>
+          <EntitySet Name="order_prd" EntityType="artevolModel.order_prd" />
+          <AssociationSet Name="FK_order_prd_product" Association="artevolModel.FK_order_prd_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="order_prd" EntitySet="order_prd" />
+          </AssociationSet>
+          <EntitySet Name="orders" EntityType="artevolModel.order" />
+          <AssociationSet Name="FK_order_prd_order" Association="artevolModel.FK_order_prd_order">
+            <End Role="order" EntitySet="orders" />
+            <End Role="order_prd" EntitySet="order_prd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_user" Association="artevolModel.FK_order_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="bid">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prd_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <NavigationProperty Name="product" Relationship="artevolModel.FK_bids_product" FromRole="bid" ToRole="product" />
+          <NavigationProperty Name="user" Relationship="artevolModel.FK_bids_user" FromRole="bid" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_bids_product">
+          <End Type="artevolModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="artevolModel.bid" Role="bid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bid">
+              <PropertyRef Name="prd_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bids_user">
+          <End Type="artevolModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="artevolModel.bid" Role="bid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bid">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="order_prd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order" Type="Int32" Nullable="false" />
+          <Property Name="product" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="product1" Relationship="artevolModel.FK_order_prd_product" FromRole="order_prd" ToRole="product" />
+          <NavigationProperty Name="order1" Relationship="artevolModel.FK_order_prd_order" FromRole="order_prd" ToRole="order" />
+        </EntityType>
+        <Association Name="FK_order_prd_product">
+          <End Type="artevolModel.product" Role="product" Multiplicity="1" />
+          <End Type="artevolModel.order_prd" Role="order_prd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_prd">
+              <PropertyRef Name="product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="payment_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tr_id" Type="Int32" />
+          <Property Name="tr_img" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="order_prd" Relationship="artevolModel.FK_order_prd_order" FromRole="order" ToRole="order_prd" />
+          <NavigationProperty Name="user1" Relationship="artevolModel.FK_order_user" FromRole="order" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_order_prd_order">
+          <End Type="artevolModel.order" Role="order" Multiplicity="1" />
+          <End Type="artevolModel.order_prd" Role="order_prd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_prd">
+              <PropertyRef Name="order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_user">
+          <End Type="artevolModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="artevolModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="artevolModelStoreContainer" CdmEntityContainer="artevolEntities">
+          <EntitySetMapping Name="art_type">
+            <EntityTypeMapping TypeName="artevolModel.art_type">
+              <MappingFragment StoreEntitySet="art_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="artevolModel.image">
+              <MappingFragment StoreEntitySet="images">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="prd_id" ColumnName="prd_id" />
+                <ScalarProperty Name="url" ColumnName="url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="artevolModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="sale_type" ColumnName="sale_type" />
+                <ScalarProperty Name="art_type" ColumnName="art_type" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="addedBy" ColumnName="addedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reqTypes">
+            <EntityTypeMapping TypeName="artevolModel.reqType">
+              <MappingFragment StoreEntitySet="reqType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="requests">
+            <EntityTypeMapping TypeName="artevolModel.request">
+              <MappingFragment StoreEntitySet="request">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="reqType" ColumnName="reqType" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="artevolModel.role">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="role1" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sale_type">
+            <EntityTypeMapping TypeName="artevolModel.sale_type">
+              <MappingFragment StoreEntitySet="sale_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sale" ColumnName="sale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="artevolModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bids">
+            <EntityTypeMapping TypeName="artevolModel.bid">
+              <MappingFragment StoreEntitySet="bids">
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="prd_id" ColumnName="prd_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_prd">
+            <EntityTypeMapping TypeName="artevolModel.order_prd">
+              <MappingFragment StoreEntitySet="order_prd">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="artevolModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="tr_img" ColumnName="tr_img" />
+                <ScalarProperty Name="tr_id" ColumnName="tr_id" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e528d0a2864447d6ad4588ee8b71ffdd" Name="Diagram1" ZoomLevel="48">
+        <EntityTypeShape EntityType="artevolModel.art_type" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="artevolModel.image" Width="1.5" PointX="10.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="artevolModel.product" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="artevolModel.reqType" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="artevolModel.request" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="artevolModel.role" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="artevolModel.sale_type" Width="1.5" PointX="10" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="artevolModel.user" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="artevolModel.FK_product_art_type" ManuallyRouted="false" />
+        <AssociationConnector Association="artevolModel.FK_images_product" ManuallyRouted="false" />
+        <AssociationConnector Association="artevolModel.FK_product_sale_type" ManuallyRouted="false" />
+        <AssociationConnector Association="artevolModel.FK_product_user" ManuallyRouted="false" />
+        <AssociationConnector Association="artevolModel.FK_request_reqType" ManuallyRouted="false" />
+        <AssociationConnector Association="artevolModel.FK_request_user" ManuallyRouted="false" />
+        <AssociationConnector Association="artevolModel.FK_user_roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="artevolModel.bid" Width="1.5" PointX="10.5" PointY="2.625" />
+        <AssociationConnector Association="artevolModel.FK_bids_product" />
+        <AssociationConnector Association="artevolModel.FK_bids_user" />
+        <EntityTypeShape EntityType="artevolModel.order_prd" Width="1.5" PointX="12.5" PointY="8.75" />
+        <AssociationConnector Association="artevolModel.FK_order_prd_product" />
+        <EntityTypeShape EntityType="artevolModel.order" Width="1.5" PointX="5.25" PointY="5.125" />
+        <AssociationConnector Association="artevolModel.FK_order_prd_order" />
+        <AssociationConnector Association="artevolModel.FK_order_user" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

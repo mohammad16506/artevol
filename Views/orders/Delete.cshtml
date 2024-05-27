@@ -1,0 +1,89 @@
+﻿@model artevol.Models.order
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tr_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tr_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tr_img)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tr_img)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user1.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user1.name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

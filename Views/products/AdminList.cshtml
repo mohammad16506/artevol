@@ -1,0 +1,92 @@
+﻿@model IEnumerable<artevol.Models.product>
+
+@{
+    ViewBag.Title = "AdminList";
+    Layout = "~/Views/Shared/site_layout.cshtml";
+}
+
+<div class="flex justify-content-around mt-3">
+<h2 class="text-center mt-0 ">Product List</h2>
+<a href="@Url.Action("create","Products")">
+    <div class="btn button mgt ">ADD A PRODUCT</div>
+</a>
+</div>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<div class="container">
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.isActive)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.art_type1.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sale_type1.sale)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user.name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.isActive)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.art_type1.type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sale_type1.sale)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.name)
+                </td>
+                <td class="" >
+                    <div class="flex w-100 h-100 flex-column justify-content-around">
+                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-warning my-2" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-success my-2" })
+                        
+                        @if ( Convert.ToInt32(item.isActive )== 0)
+                        {
+                            @Html.ActionLink("Activate", "Activate", new { id = item.id }, new { @class = "btn btn-danger my-2 text-warning" })
+                        }
+                        else if(Convert.ToInt32(item.isActive) == 1)
+                        {
+                            @Html.ActionLink("Delete", "DeleteConfirmed", new { id = item.id }, new { @class = "btn btn-danger my-2" })
+                        }
+                    </div>
+
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
